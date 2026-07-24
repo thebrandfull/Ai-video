@@ -2,6 +2,23 @@
 
 Give it a video, get back the same video as a **depth map** — every frame shows how far each pixel is from the camera, so all the movement and structure of the original is preserved in depth form.
 
+## Web app (deploy on Vercel)
+
+The `web/` folder is a full browser app: **upload a video → trim the seconds you want → convert to a depth video → download**. The AI model (Depth Anything V2) runs entirely in the visitor's browser via transformers.js (WebGPU when available), so there is no server compute, no upload, and hosting is free.
+
+Deploy it in ~2 minutes:
+
+1. Go to [vercel.com/new](https://vercel.com/new) and sign in with your GitHub account.
+2. Import this repository (`thebrandfull/Ai-video`).
+3. Leave every setting as-is (the included `vercel.json` configures everything) and press **Deploy**.
+4. Open the URL Vercel gives you — that's your app.
+
+Any push to the repo's default branch auto-redeploys. To test locally: `python3 -m http.server -d web 8000` and open http://localhost:8000.
+
+Notes: the first conversion downloads the model (~45 MB) into the browser cache; Chrome/Edge with WebGPU is fastest. Default output is grayscale depth (bright = near); side-by-side mode puts the original and depth next to each other.
+
+## Python CLI
+
 Under the hood it runs [Depth Anything V2](https://huggingface.co/depth-anything/Depth-Anything-V2-Small-hf) on every frame, then stabilizes the depth scale across frames (monocular depth is only defined up to scale, so naive per-frame normalization flickers — this tool smooths that out).
 
 ## Install

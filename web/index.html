@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Video → Depth Map</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <header>
+    <h1>Video → Depth Map</h1>
+    <p class="sub">Upload a video, trim the part you want, and convert it into a depth-map video.
+    Everything runs in your browser — nothing is uploaded to a server.</p>
+  </header>
+
+  <section id="drop-zone" class="card drop">
+    <input type="file" id="file-input" accept="video/*" hidden>
+    <p><strong>Drop a video here</strong> or <button id="browse-btn" class="link">browse</button></p>
+    <p class="hint">mp4, webm, mov — anything your browser can play</p>
+  </section>
+
+  <section id="editor" class="hidden">
+    <div class="card">
+      <video id="video" controls playsinline></video>
+
+      <div class="trim">
+        <h2>Trim</h2>
+        <div class="trim-row">
+          <label>Start <span id="start-label">0.0s</span>
+            <input type="range" id="start-range" min="0" max="0" step="0.1" value="0">
+          </label>
+          <label>End <span id="end-label">0.0s</span>
+            <input type="range" id="end-range" min="0" max="0" step="0.1" value="0">
+          </label>
+        </div>
+        <p class="hint">Selected: <strong id="clip-length">0.0s</strong>
+          <button id="full-btn" class="link">use full video</button>
+          <button id="preview-btn" class="link">preview selection</button>
+        </p>
+      </div>
+
+      <div class="settings">
+        <h2>Settings</h2>
+        <div class="settings-grid">
+          <label>Frame rate
+            <select id="fps">
+              <option value="10">10 fps (fastest)</option>
+              <option value="15" selected>15 fps</option>
+              <option value="24">24 fps</option>
+              <option value="30">30 fps (slowest)</option>
+            </select>
+          </label>
+          <label>Color style
+            <select id="colormap">
+              <option value="gray" selected>Grayscale</option>
+              <option value="inferno">Inferno</option>
+              <option value="magma">Magma</option>
+              <option value="viridis">Viridis</option>
+            </select>
+          </label>
+          <label>Resolution
+            <select id="resolution">
+              <option value="480">480p (fastest)</option>
+              <option value="720" selected>720p</option>
+              <option value="0">Original</option>
+            </select>
+          </label>
+          <label class="check"><input type="checkbox" id="side-by-side"> Side-by-side with original</label>
+          <label class="check"><input type="checkbox" id="invert"> Invert (bright = far)</label>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button id="convert-btn" class="primary">Convert to depth video</button>
+        <button id="cancel-btn" class="hidden">Cancel</button>
+        <span id="device-badge" class="badge"></span>
+      </div>
+
+      <div id="progress-wrap" class="hidden">
+        <div class="bar"><div id="progress-bar"></div></div>
+        <p id="status" class="hint"></p>
+      </div>
+    </div>
+
+    <div id="result" class="card hidden">
+      <h2>Result</h2>
+      <canvas id="out-canvas"></canvas>
+      <p><a id="download-link" class="primary btn-link" download="depth.mp4">Download depth video</a></p>
+    </div>
+  </section>
+
+  <footer>
+    <p class="hint">Powered by <a href="https://huggingface.co/onnx-community/depth-anything-v2-small" target="_blank" rel="noopener">Depth Anything V2</a>
+    running locally via transformers.js. First conversion downloads the model (~45&nbsp;MB), then it's cached.</p>
+  </footer>
+</main>
+<script type="module" src="app.js"></script>
+</body>
+</html>
