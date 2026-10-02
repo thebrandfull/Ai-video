@@ -17,6 +17,14 @@ Any push to the repo's default branch auto-redeploys. To test locally: `python3 
 
 Notes: the first conversion downloads the model (~45 MB) into the browser cache; Chrome/Edge with WebGPU is fastest. Default output is grayscale depth (bright = near); side-by-side mode puts the original and depth next to each other.
 
+## Holo Mythos (`web/mythos/`)
+
+A second page in the same deployment: a real-time holographic 3D animation in which a Chinese dragon
+transforms into nine mythical creatures (Kitsune, Garuda, Griffin, Sphinx, Firebird, Quetzalcoatl, Kraken,
+Unicorn) while the set changes to each creature's country. Pure JavaScript / Three.js, no build step.
+Open `/mythos/` on the deployed site (or `http://localhost:8000/mythos/` locally), press `R` to record a
+video, or use `web/mythos/tools/render-video.mjs` for a frame-exact MP4. See `web/mythos/README.md`.
+
 ## Python CLI
 
 Under the hood it runs [Depth Anything V2](https://huggingface.co/depth-anything/Depth-Anything-V2-Small-hf) on every frame, then stabilizes the depth scale across frames (monocular depth is only defined up to scale, so naive per-frame normalization flickers — this tool smooths that out).

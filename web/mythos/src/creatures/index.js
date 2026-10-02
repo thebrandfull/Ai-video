@@ -1,0 +1,10 @@
+import dragon from './dragon.js';
+import kitsune from './kitsune.js';
+import garuda from './garuda.js';
+import griffin from './griffin.js';
+import sphinx from './sphinx.js';
+import firebird from './firebird.js';
+import quetzalcoatl from './quetzalcoatl.js';
+import kraken from './kraken.js';
+import unicorn from './unicorn.js';
+export const CREATURES = [dragon, kitsune, garuda, griffin, sphinx, firebird, quetzalcoatl, kraken, unicorn];

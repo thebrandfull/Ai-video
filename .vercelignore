@@ -1,0 +1,6 @@
+# Vercel only serves the static site in web/ — keep the Python CLI out of the build so the
+# platform does not try to deploy it as a Python function.
+*.py
+requirements.txt
+__pycache__/
+*.mp4

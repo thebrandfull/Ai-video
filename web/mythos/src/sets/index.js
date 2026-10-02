@@ -1,0 +1,10 @@
+import china from './china.js';
+import japan from './japan.js';
+import indonesia from './indonesia.js';
+import greece from './greece.js';
+import egypt from './egypt.js';
+import russia from './russia.js';
+import mexico from './mexico.js';
+import norway from './norway.js';
+import scotland from './scotland.js';
+export const SETS = [china, japan, indonesia, greece, egypt, russia, mexico, norway, scotland];
