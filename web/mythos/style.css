@@ -1,0 +1,34 @@
+:root { --accent: #7ff6ff; --font: "Segoe UI", system-ui, -apple-system, Helvetica, Arial, sans-serif; }
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: #02040a; color: #dff9ff; font-family: var(--font); overflow: hidden; }
+#view { position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); display: block; width: 100vw; height: 100vh; cursor: pointer; }
+
+#hud { position: fixed; inset: 0; pointer-events: none; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; transition: opacity .4s; }
+#hud.hidden { opacity: 0; }
+#hud .brand { position: absolute; left: 28px; top: 24px; font-weight: 600; display: flex; align-items: center; gap: 10px; text-shadow: 0 0 12px rgba(127,246,255,.6); }
+#hud .brand .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 10px var(--accent); animation: pulse 1.6s infinite; }
+#hud .dim { opacity: .5; font-weight: 400; }
+#hud .status { position: absolute; right: 28px; top: 24px; opacity: .85; text-shadow: 0 0 10px rgba(127,246,255,.5); }
+#hud .dots { position: absolute; left: 50%; bottom: 26px; transform: translateX(-50%); display: flex; gap: 10px; }
+#hud .dots i { width: 22px; height: 3px; background: rgba(127,246,255,.25); transition: background .3s, box-shadow .3s; }
+#hud .dots i.on { background: var(--accent); box-shadow: 0 0 8px var(--accent); }
+#hud .keys { position: absolute; left: 28px; bottom: 22px; display: flex; gap: 22px; opacity: .55; font-size: 11px; }
+#hud .keys b { color: var(--accent); font-weight: 600; }
+#rec { position: absolute; right: 28px; bottom: 22px; display: none; align-items: center; gap: 8px; color: #ff5c5c; font-weight: 600; }
+#rec.on { display: flex; }
+#rec i { width: 10px; height: 10px; border-radius: 50%; background: #ff3b3b; box-shadow: 0 0 10px #ff3b3b; animation: pulse 1s infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .25; } }
+
+#loader { position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; background: radial-gradient(ellipse at center, #061226 0%, #02040a 70%); transition: opacity .8s; z-index: 10; }
+#loader.done { opacity: 0; pointer-events: none; }
+#loader .core { position: relative; width: 120px; height: 120px; }
+#loader .ring { position: absolute; inset: 0; border: 2px solid transparent; border-top-color: var(--accent); border-radius: 50%; animation: spin 1.6s linear infinite; box-shadow: 0 0 18px rgba(127,246,255,.25) inset; }
+#loader .ring.r2 { inset: 16px; animation-duration: 1.1s; animation-direction: reverse; border-top-color: #ffb547; }
+#loader .ring.r3 { inset: 34px; animation-duration: 2.4s; border-top-color: #ff6a8a; }
+@keyframes spin { to { transform: rotate(360deg); } }
+#loader .title { font-size: 28px; font-weight: 700; letter-spacing: .5em; text-indent: .5em; text-shadow: 0 0 24px rgba(127,246,255,.8); }
+#loader .msg { font-size: 12px; letter-spacing: .3em; opacity: .7; min-height: 16px; }
+#loader .bar { width: 260px; height: 2px; background: rgba(127,246,255,.15); }
+#loader .bar div { height: 100%; width: 0; background: var(--accent); box-shadow: 0 0 10px var(--accent); transition: width .2s; }
+#loader .hint { margin-top: 20px; font-size: 11px; opacity: .45; letter-spacing: .05em; }
+#loader code { color: var(--accent); }

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Holo Mythos — Dragon of Many Forms</title>
+<link rel="stylesheet" href="style.css">
+<script type="importmap">
+{ "imports": { "three": "./vendor/three/three.module.js", "three/addons/": "./vendor/three/addons/" } }
+</script>
+</head>
+<body>
+<canvas id="view"></canvas>
+
+<div id="hud">
+  <div class="brand"><span class="dot"></span>HOLO MYTHOS <span class="dim">// volumetric projection</span></div>
+  <div id="hud-status" class="status"></div>
+  <div id="dots" class="dots"></div>
+  <div class="keys">
+    <span><b>SPACE</b> next form</span><span><b>←/→</b> skip</span><span><b>P</b> pause</span>
+    <span><b>R</b> record one full cycle (.webm)</span><span><b>F</b> fullscreen</span><span><b>H</b> hide HUD</span>
+  </div>
+  <div id="rec"><i></i>REC</div>
+</div>
+
+<div id="loader">
+  <div class="core"><div class="ring"></div><div class="ring r2"></div><div class="ring r3"></div></div>
+  <div class="title">HOLO MYTHOS</div>
+  <div id="load-msg" class="msg">INITIALIZING HOLOGRAPHIC CORE</div>
+  <div class="bar"><div id="load-bar"></div></div>
+  <div class="hint">Best in Chrome / Edge on a dedicated GPU · add <code>?w=1920&amp;h=1080</code> for a pixel-exact 1080p canvas</div>
+</div>
+
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
