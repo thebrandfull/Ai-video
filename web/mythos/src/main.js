@@ -95,10 +95,10 @@ function startRecording({ seconds = null, download = true } = {}) {
   chunks = [];
   recorder.ondataavailable = (e) => { if (e.data.size) chunks.push(e.data); };
   const done = new Promise((resolve) => {
-    recorder.onstop = () => {
+    recorder.onstop = async () => {
       const blob = new Blob(chunks, { type: 'video/webm' });
-      if (download) { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `holo-mythos-${Date.now()}.webm`; a.click(); }
       recorder = null; $('#rec').classList.remove('on');
+      if (download) await saveFile(blob, `holo-mythos-${Date.now()}.webm`);
       resolve(blob);
     };
   });
@@ -108,6 +108,15 @@ function startRecording({ seconds = null, download = true } = {}) {
   recorder.start(250);
   $('#rec').classList.add('on');
   return done;
+}
+// Hand the file to the viewer: through the claude.ai artifact "downloads" capability when the page is
+// published there (plain downloads are blocked in that sandbox), otherwise a normal browser download.
+async function saveFile(blob, filename) {
+  try {
+    const dl = typeof window.claude?.use === 'function' ? await window.claude.use('downloads') : null;
+    if (dl) { await dl.save({ filename, data: blob }); return; }
+  } catch (e) { /* viewer declined or the capability is unavailable — fall through to a normal download */ }
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = filename; a.click();
 }
 function stopRecording() { if (recorder && recorder.state !== 'inactive') recorder.stop(); }
 
