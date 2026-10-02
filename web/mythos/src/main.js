@@ -118,7 +118,7 @@ window.addEventListener('keydown', (e) => {
   else if (e.key === 'p' || e.key === 'P') paused = !paused;
   else if (e.key === 'r' || e.key === 'R') recorder ? stopRecording() : startRecording();
   else if (e.key === 'h' || e.key === 'H') $('#hud').classList.toggle('hidden');
-  else if (e.key === 'f' || e.key === 'F') document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
+  else if (e.key === 'f' || e.key === 'F') document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen().catch(() => {});
 });
 canvas.addEventListener('click', () => skip(1));
 
